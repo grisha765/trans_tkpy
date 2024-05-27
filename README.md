@@ -21,7 +21,7 @@ sudo pacman -S tk wl-clipboard #arch
 1. **Download binary**: https://github.com/grisha765/trans_tkpy/releases
 
 ```shell
-wget -O ~/.local/bin/trans_tkpy https://github.com/grisha765/trans_tkpy/releases/download/Release1/main && chmod +x ~/.local/bin/trans_tkpy
+latest_release=$(curl -s https://api.github.com/repos/grisha765/trans_tkpy/releases/latest | grep "browser_download_url.*main" | cut -d '"' -f 4) && wget -O ~/.local/bin/trans_tkpy "$latest_release" && chmod +x ~/.local/bin/trans_tkpy
 ```
 
 ### Usage
