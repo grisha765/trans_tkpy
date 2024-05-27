@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 import subprocess
 import sys
-import re
 
 def get_clipboard_text():
     try:
@@ -13,9 +12,8 @@ def get_clipboard_text():
         return ""
 
 def translate_text(text, target_lang):
-    translator = Translator()
-    translated_text = translator.translate(text, dest=target_lang)
-    return translated_text.text
+    translated_text = GoogleTranslator(source='auto', target=f'{target_lang}').translate(f"{text}")
+    return translated_text
 
 def on_copy_click():
     subprocess.call(["wl-copy", f"{translated_text}"])
@@ -53,8 +51,15 @@ def get_coords():
     
     return x, y
 
+attempts = 3
 x, y = get_coords()
+while (x is None or y is None) and attempts > 1:
+    attempts -= 1
+    x, y = get_coords()
 
+if x is None or y is None:
+    x, y = 0, 0
+    
 root = tk.Tk()
 root.title("Text Translator")
 root.overrideredirect(True)
