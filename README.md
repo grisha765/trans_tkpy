@@ -20,6 +20,10 @@ sudo pacman -S tk wl-clipboard #arch
 #### Bonus
 1. **Download binary**: https://github.com/grisha765/trans_tkpy/releases
 
+```shell
+wget -O ~/.local/bin/trans_tkpy https://github.com/grisha765/trans_tkpy/releases/download/Release1/main && chmod +x ~/.local/bin/trans_tkpy
+```
+
 ### Usage
 1. Select the text that needs to be translated.
 2. Run the script with the desired target language specified as a command-line argument.
