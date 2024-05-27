@@ -11,7 +11,7 @@ This Python script enables quick translation of text from the primary clipboard 
 git clone https://github.com/grisha765/trans_tkpy.git
 cd trans_tkpy
 python3 -m venv venv
-venv/bin/pip3 install googletrans==4.0.0-rc1
+venv/bin/pip3 install -r requirements.txt
 sudo apt-get install python3-tk wl-clipboard #debian
 sudo dnf install python3-tkinter wl-clipboard #fedora
 sudo pacman -S tk wl-clipboard #arch
