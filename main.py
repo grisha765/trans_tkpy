@@ -22,43 +22,7 @@ def on_copy_click():
 def on_close_click():
     root.destroy()
 
-x = None
-y = None
-
-def get_coords():
-    global x, y
-    
-    root = tk.Tk()
-    
-    screen_width = root.winfo_screenwidth()
-    screen_height = root.winfo_screenheight()
-    
-    root.attributes('-fullscreen', True)
-    root.attributes('-alpha', 0)
-    root.configure(bg='black')
-    
-    def get_mouse_position(event):
-        global x, y
-        x, y = event.x, event.y
-        root.quit()
-    
-    root.bind('<Motion>', get_mouse_position)
-    
-    root.after(100, root.quit)
-    root.mainloop()    
-    
-    root.destroy()
-    
-    return x, y
-
-attempts = 3
-x, y = get_coords()
-while (x is None or y is None) and attempts > 1:
-    attempts -= 1
-    x, y = get_coords()
-
-if x is None or y is None:
-    x, y = 0, 0
+x, y = sys.argv[2], sys.argv[3]
     
 root = tk.Tk()
 root.title("Text Translator")
