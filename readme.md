@@ -31,7 +31,7 @@ latest_release=$(curl -s https://api.github.com/repos/grisha765/trans_tkpy/relea
 4. You can copy the translated text to the clipboard or close the window as needed.
 
 ```shell
-venv/bin/python3 main.py ru
+venv/bin/python3 main.py ru $(hyprctl cursorpos |  sed 's/,//g')
 ```
 read [ISO_639-1](https://en.wikipedia.org/wiki/ISO_639-1)
 
