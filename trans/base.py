@@ -34,10 +34,8 @@ def translate_text(text):
 def update_translation(root, messagebox, subprocess, use_primary, translation_label):
     text = get_clipboard_primary_text(messagebox, subprocess) if use_primary["use"] else get_clipboard_text(messagebox, subprocess)
     if not text:
-        import sys
         messagebox.showwarning("Warning", "No text found in clipboard.")
         root.destroy()
-        sys.exit()
     translated_text = translate_text(str(text))
     translation_label.config(text=translated_text)
 
