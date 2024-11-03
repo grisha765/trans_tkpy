@@ -13,7 +13,7 @@ def translate_text(text):
     logging.debug(f"In text: {text}")
     text = urllib.parse.quote(text)
     try:
-        response = requests.get(f"{Config.lingva_url}/api/v1/{in_lang}/{out_lang}/{text}", timeout=Config.request_timeout)
+        response = requests.get(f"{Config.lingva_url}/api/v1/{in_lang}/{out_lang}/{text}", timeout=int(Config.request_timeout))
         if response.status_code == 200:
             data = response.json().get("translation", "Translate not found")
             logging.debug(f"Out text: {data}")
