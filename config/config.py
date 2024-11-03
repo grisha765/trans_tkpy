@@ -2,8 +2,11 @@ import os
 
 class Config:
     log_level: str = "INFO"
-    get_coords: str = "hyprctl cursorpos |  sed 's/,//g'"
-    trans_lang: str = "ru"
+    trans_coords: str = "0 0" #x=0, y=0
+    in_trans_lang: str = "auto"
+    out_trans_lang: str = "ru"
+    lingva_url: str = "http://golyam.ddns.cam:3000/"
+    request_timeout: int = 20
     
     @classmethod
     def load_from_env(cls):
@@ -16,11 +19,6 @@ class Config:
                     setattr(cls, key, env_value.split(","))
                 else:
                     setattr(cls, key, env_value)
-    @classmethod
-    def coords_var(cls):
-        with os.popen(cls.get_coords) as stream:
-            result = stream.read().strip()
-        return result
 
 Config.load_from_env()
 
