@@ -3,7 +3,9 @@ This Python script enables quick translation of text from the primary clipboard 
 
 ### Demo
 
-![Translate RU to EN](.github/assets/demo.gif)
+<p align="left">
+  <img src=".github/assets/demo.gif" alt="Demo Translate RU to EN", width="400">
+</p>
 
 ### Build
 
