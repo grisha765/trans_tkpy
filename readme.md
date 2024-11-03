@@ -54,21 +54,25 @@ sudo pacman -S tk wl-clipboard #arch
 - Use script:
     - Simple set window pos:
         ```bash
-        TRANS_COORDS="100 100" \
+        KEYS="KEY_LEFTALT,KEY_LEFTSHIFT,KEY_R" \ # for daemon mode
+        COORDS_CMD="echo 100 100" \
         OUT_TRANS_LANG="ru" \
-        trans_tkpy
+        trans_tkpy # -d for daemon mode
         ```
 
     - Use `hyprland` func for get cursor position:
         ```bash
-        TRANS_COORDS=$(hyprctl cursorpos |  sed 's/,//g') \
+        KEYS="KEY_LEFTALT,KEY_LEFTSHIFT,KEY_R" \ # for daemon mode
+        COORDS_CMD="hyprctl cursorpos |  sed 's/,//g'" \
         OUT_TRANS_LANG="ru" \
-        trans_tkpy
+        trans_tkpy # use -d for daemon mode
         ```
 
 ### Features
 
-1. Retrieves text from the primary `clipboard` for translation.
-2. Translates text to the desired language using the `Lingva Translate API`.
-3. Dynamically positions the translation window based on `coords` location.
-4. Allows copying of translated text to the `clipboard`.
+- Retrieves text from the primary `clipboard` for translation.
+- Translates text to the desired language using the `Lingva Translate API`.
+- Dynamically positions the translation window based on `coords` location.
+- Allows copying of translated text to the `clipboard`.
+- Runs in `daemon mode` with custom key `bindings` for `background` operation.
+- `Detects` and assigns the active keyboard device `automatically`.
