@@ -14,7 +14,7 @@ def window():
     root = tk.Tk()
     root.title("Text Translator")
     root.overrideredirect(True)
-    x, y = map(int, Config.trans_coords.split())
+    x, y = map(int, Config.trans_coords().split())
     logging.debug(f"Window coords: x:{x}, y:{y}")
     root.geometry(f"+{x}+{y}")
 
