@@ -1,0 +1,62 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Upload to Pre-release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies and pyinstaller
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Build with pyinstaller
+      run: |
+        source .venv/bin/activate
+        pyinstaller main.spec
+
+    - name: Get short commit SHA and commit count
+      id: vars
+      run: | 
+        echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        echo "COMMIT_NUMBER=$(git rev-list --count HEAD)" >> $GITHUB_ENV
+
+    - name: Create Pre-release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: "build-${{ env.SHORT_SHA }}-${{ env.COMMIT_NUMBER }}"
+        release_name: "Build from commit ${{ env.SHORT_SHA }}"
+        prerelease: true
+        draft: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/main
+        asset_name: main
+        asset_content_type: application/octet-stream
