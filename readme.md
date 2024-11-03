@@ -1,5 +1,10 @@
 # trans_tkpy
 This Python script enables quick translation of text from the primary clipboard to a specified language. It utilizes the Google Translate API for translation and tkinter for the graphical user interface. The script automatically detects the language of the text in the clipboard and translates it to the specified target language.
+
+### Demo
+
+![Translate RU to EN](.github/assets/demo.gif)
+
 ### Build
 
 1. **Clone the repository**: Clone this repository using `git clone`.
@@ -28,6 +33,7 @@ sudo pacman -S tk wl-clipboard #arch
     ```
 
 ### Usage
+
 1. Select the `text` that needs to be translated.
 2. Run the script with the desired target language specified as a `env` export.
 3. The translated text will be displayed in a window that follows your `coords`.
