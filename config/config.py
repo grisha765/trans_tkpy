@@ -7,6 +7,7 @@ class Config:
     out_trans_lang: str = "ru"
     lingva_url: str = "http://golyam.ddns.cam:3000/"
     request_timeout: str = "20"
+    keys: list = ["KEY_LEFTALT", "KEY_LEFTSHIFT", "KEY_R"]
     
     @classmethod
     def load_from_env(cls):
