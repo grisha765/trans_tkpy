@@ -20,17 +20,13 @@ def window():
 
     text = get_clipboard_primary_text(messagebox, subprocess) if use_primary else get_clipboard_text(messagebox, subprocess)
     if not text:
-        import sys
         messagebox.showwarning("Warning", "No text found in clipboard.")
         root.destroy()
-        sys.exit()
 
     out_text = translate_text(str(text))
     if "Error request:" in str(out_text):
-        import sys
         messagebox.showwarning("Error", f"{out_text}")
         root.destroy()
-        sys.exit()
 
     wraplength = root.winfo_screenwidth() // 2
 
