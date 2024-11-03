@@ -2,7 +2,7 @@ import os
 
 class Config:
     log_level: str = "INFO"
-    trans_coords: str = "0 0" #x=0, y=0
+    coords_cmd: str = "echo 0 0" #x=0, y=0
     in_trans_lang: str = "auto"
     out_trans_lang: str = "ru"
     lingva_url: str = "http://golyam.ddns.cam:3000/"
@@ -19,6 +19,15 @@ class Config:
                     setattr(cls, key, env_value.split(","))
                 else:
                     setattr(cls, key, env_value)
+    @classmethod
+    def trans_coords(cls):
+        try:
+            with os.popen(cls.coords_cmd) as proc:
+                result = proc.read().strip()
+            return result
+        except Exception as e:
+            print(f"Error executing command '{cls.coords_cmd}': {e}")
+            return "0 0"
 
 Config.load_from_env()
 
