@@ -1,11 +1,12 @@
+import subprocess
 import tkinter as tk
 from tkinter import messagebox
-import subprocess
-import sys
 from core.buttons import switch_source, on_copy_click, on_close_click
 from core.clipboard import get_clipboard_text, get_clipboard_primary_text
 from trans.base import translate_text, update_translation
 from config.config import Config
+from config import logging_config
+logging = logging_config.setup_logging(__name__)
 
 use_primary = {"use": True}
 
@@ -13,20 +14,27 @@ def window():
     root = tk.Tk()
     root.title("Text Translator")
     root.overrideredirect(True)
-    x, y = map(int, Config.coords_var().split())
+    x, y = map(int, Config.trans_coords.split())
+    logging.debug(f"Window coords: x:{x}, y:{y}")
     root.geometry(f"+{x}+{y}")
 
     text = get_clipboard_primary_text(messagebox, subprocess) if use_primary else get_clipboard_text(messagebox, subprocess)
     if not text:
+        import sys
         messagebox.showwarning("Warning", "No text found in clipboard.")
         root.destroy()
         sys.exit()
 
-    translated_text = translate_text(str(text))
+    out_text = translate_text(str(text))
+    if "Error request:" in str(out_text):
+        import sys
+        messagebox.showwarning("Error", f"{out_text}")
+        root.destroy()
+        sys.exit()
 
     wraplength = root.winfo_screenwidth() // 2
 
-    translation_label = tk.Label(root, text=translated_text, wraplength=wraplength, justify="left")
+    translation_label = tk.Label(root, text=out_text, wraplength=wraplength, justify="left")
     translation_label.pack(pady=10)
 
     button_frame = tk.Frame(root)
