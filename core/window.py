@@ -43,11 +43,7 @@ def window():
     copy_button = tk.Button(button_frame, text="Copy",
                             command=lambda: on_copy_click(root,
                                                           subprocess,
-                                                          lambda: update_translation(root,
-                                                                                     messagebox,
-                                                                                     subprocess,
-                                                                                     use_primary,
-                                                                                     translation_label)))
+                                                          out_text))
     copy_button.pack(side=tk.LEFT, padx=5)
 
     source_button = tk.Button(button_frame, text="Clipboard",
