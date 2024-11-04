@@ -1,5 +1,5 @@
 # trans_tkpy
-This Python script enables quick translation of text from the primary clipboard to a specified language. It utilizes the Google Translate API for translation and tkinter for the graphical user interface. The script automatically detects the language of the text in the clipboard and translates it to the specified target language.
+This Python script enables quick translation of text from the primary clipboard to a specified language. It utilizes the Lingva Translate API for translation and tkinter for the graphical user interface. The script automatically detects the language of the text in the clipboard and translates it to the specified target language.
 
 ### Demo
 
@@ -58,7 +58,7 @@ sudo pacman -S tk wl-clipboard #arch
         KEYS="KEY_LEFTALT,KEY_LEFTSHIFT,KEY_R" \ # for daemon mode
         COORDS_CMD="echo 100 100" \
         OUT_TRANS_LANG="ru" \
-        trans_tkpy # -d for daemon mode
+        trans_tkpy # use -d for daemon mode
         ```
 
     - Use `hyprland` func for get cursor position:
