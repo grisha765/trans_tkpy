@@ -35,6 +35,7 @@ def find_keyboard(active_device):
 
 def key_daemon(active_device):
     keys = Config.keys
+    logging.debug(f"Set keys: {keys}")
     key_states = {key: False for key in keys}
     for event in active_device.read_loop():
         if event.type == ecodes.EV_KEY:
