@@ -1,5 +1,4 @@
 import os
-from typing import get_type_hints
 
 class Config:
     log_level: str = "INFO"
@@ -12,13 +11,13 @@ class Config:
     
     @classmethod
     def load_from_env(cls):
-        type_hints = get_type_hints(cls)
-        for key, var_type in type_hints.items():
+        for key in cls.__annotations__:
             env_value = os.getenv(key.upper())
             if env_value is not None:
-                if var_type == int:
+                current_value = getattr(cls, key)
+                if isinstance(current_value, int):
                     setattr(cls, key, int(env_value))
-                elif var_type == list:
+                elif isinstance(current_value, list):
                     setattr(cls, key, env_value.split(","))
                 else:
                     setattr(cls, key, env_value)
