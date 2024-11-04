@@ -1,4 +1,5 @@
 import os
+from typing import get_type_hints
 
 class Config:
     log_level: str = "INFO"
@@ -6,17 +7,18 @@ class Config:
     in_trans_lang: str = "auto"
     out_trans_lang: str = "ru"
     lingva_url: str = "http://golyam.ddns.cam:3000/"
-    request_timeout: str = "20"
+    request_timeout: int = 20
     keys: list = ["KEY_LEFTALT", "KEY_LEFTSHIFT", "KEY_R"]
     
     @classmethod
     def load_from_env(cls):
-        for key, value in cls.__annotations__.items():
+        type_hints = get_type_hints(cls)
+        for key, var_type in type_hints.items():
             env_value = os.getenv(key.upper())
             if env_value is not None:
-                if isinstance(value, int):
+                if var_type == int:
                     setattr(cls, key, int(env_value))
-                elif isinstance(value, list):
+                elif var_type == list:
                     setattr(cls, key, env_value.split(","))
                 else:
                     setattr(cls, key, env_value)
