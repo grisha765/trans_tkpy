@@ -44,7 +44,8 @@ sudo pacman -S tk wl-clipboard #arch
 - Other working env's:
     ```env
     LOG_LEVEL="INFO"
-    TRANS_COORDS="X Y"
+    COORDS_CMD="echo X Y"
+    KEYS="KEY_LEFTALT,KEY_LEFTSHIFT,KEY_R"
     IN_TRANS_LANG="auto"
     OUT_TRANS_LANG="ru"
     LINGVA_URL="https://lingva.ml/"
